@@ -12,17 +12,20 @@
       padding: 40px;
       color: #333;
     }
+
     h1 {
       font-size: 48px;
       color: #c2185b;
       animation: fadeIn 2s ease-in-out;
     }
+
     p {
       font-size: 22px;
       margin-top: 20px;
       line-height: 1.6;
       animation: slideUp 2s ease-in-out;
     }
+
     .heart {
       font-size: 40px;
       color: red;
@@ -31,9 +34,11 @@
       cursor: pointer;
       transition: transform 0.2s ease;
     }
+
     .heart.clicked {
       transform: scale(1.5);
     }
+
     img {
       width: 100%;
       max-width: 500px;
@@ -41,22 +46,28 @@
       box-shadow: 0 0 15px rgba(0,0,0,0.2);
       margin-top: 30px;
     }
-    audio {
-      margin-top: 20px;
+
+    #yt-player {
+      margin-top: 30px;
+      display: none;
     }
+
     .message {
       margin-top: 15px;
       font-size: 16px;
       color: green;
     }
+
     @keyframes fadeIn {
       from { opacity: 0; transform: scale(0.95); }
       to { opacity: 1; transform: scale(1); }
     }
+
     @keyframes slideUp {
       from { transform: translateY(40px); opacity: 0; }
       to { transform: translateY(0); opacity: 1; }
     }
+
     @keyframes heartbeat {
       0%, 100% { transform: scale(1); }
       50% { transform: scale(1.3); }
@@ -72,27 +83,22 @@
     תישארי בדיוק כמו שאת – מיוחדת, מצחיקה ואחת ויחידה.
   </p>
 
-  <div class="heart" onclick="playMusic(this)">❤️</div>
+  <div class="heart" onclick="showPlayer(this)">❤️</div>
   <div class="message" id="message"></div>
 
   <img src="image.png" alt="תמונה מהעבר">
 
-  <audio id="bday-audio" controls>
-    <source src="birthday.mp3" type="audio/mpeg">
-    הדפדפן שלך לא תומך בניגון אודיו.
-  </audio>
+  <div id="yt-player">
+    <iframe width="360" height="215"
+      src="https://www.youtube.com/embed/MP1G8wnLpSM?autoplay=1"
+      frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+  </div>
 
   <script>
-    function playMusic(element) {
-      const audio = document.getElementById("bday-audio");
-      const message = document.getElementById("message");
-      audio.play().then(() => {
-        message.innerText = "🎶 המוזיקה התחילה – תחגגי עד הסוף!";
-        element.classList.add("clicked");
-      }).catch((error) => {
-        message.innerText = "יש ללחוץ שוב כדי להפעיל את המוזיקה.";
-        console.error("Playback failed:", error);
-      });
+    function showPlayer(element) {
+      document.getElementById("yt-player").style.display = "block";
+      element.classList.add("clicked");
+      document.getElementById("message").innerText = "🎶 המוזיקה התחילה! 🎉";
     }
   </script>
 </body>
