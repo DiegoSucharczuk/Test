@@ -48,8 +48,10 @@
     }
 
     #yt-player {
-      margin-top: 30px;
-      display: none;
+      width: 0;
+      height: 0;
+      opacity: 0;
+      pointer-events: none;
     }
 
     .message {
@@ -83,22 +85,23 @@
     תישארי בדיוק כמו שאת – מיוחדת, מצחיקה ואחת ויחידה.
   </p>
 
-  <div class="heart" onclick="showPlayer(this)">❤️</div>
+  <div class="heart" onclick="playYoutube(this)">❤️</div>
   <div class="message" id="message"></div>
 
   <img src="image.png" alt="תמונה מהעבר">
 
-  <div id="yt-player">
-    <iframe width="360" height="215"
-      src="https://www.youtube.com/embed/MP1G8wnLpSM?autoplay=1"
-      frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-  </div>
+  <div id="yt-player-container"></div>
 
   <script>
-    function showPlayer(element) {
-      document.getElementById("yt-player").style.display = "block";
+    function playYoutube(element) {
+      const container = document.getElementById("yt-player-container");
+      if (container.innerHTML === "") {
+        container.innerHTML = `
+          <iframe id="yt-player" src="https://www.youtube.com/embed/MP1G8wnLpSM?autoplay=1"
+          frameborder="0" allow="autoplay; encrypted-media"></iframe>`;
+      }
       element.classList.add("clicked");
-      document.getElementById("message").innerText = "🎶 המוזיקה התחילה! 🎉";
+      document.getElementById("message").innerText = "🎶 המוזיקה התחילה!";
     }
   </script>
 </body>
